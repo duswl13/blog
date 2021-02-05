@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.yeonji.introduce.generator.mapper.CmitMemberRecommendMapper">
+  <resultMap id="BaseResultMap" type="com.blog.yeonji.introduce.generator.model.CmitMemberRecommend">
+    <id column="RM_SKEY" jdbcType="DECIMAL" property="RM_SKEY" />
+    <result column="MEM_SKEY" jdbcType="DECIMAL" property="MEM_SKEY" />
+    <result column="RM_MEMBER1" jdbcType="VARCHAR" property="RM_MEMBER1" />
+    <result column="RM_MEMBER2" jdbcType="VARCHAR" property="RM_MEMBER2" />
+    <result column="RM_MEMBER3" jdbcType="VARCHAR" property="RM_MEMBER3" />
+    <result column="CREATED_DT" jdbcType="TIMESTAMP" property="CREATED_DT" />
+    <result column="CREATOR" jdbcType="DECIMAL" property="CREATOR" />
+    <result column="LAST_MODIFIED_DT" jdbcType="TIMESTAMP" property="LAST_MODIFIED_DT" />
+    <result column="LAST_MODIFIER" jdbcType="DECIMAL" property="LAST_MODIFIER" />
+    <result column="NOTE" jdbcType="VARCHAR" property="NOTE" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    RM_SKEY, MEM_SKEY, RM_MEMBER1, RM_MEMBER2, RM_MEMBER3, CREATED_DT, CREATOR, LAST_MODIFIED_DT, 
+    LAST_MODIFIER, NOTE
+  </sql>
+  <select id="selectByExample" parameterType="com.blog.yeonji.introduce.generator.model.CmitMemberRecommendExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CMIT_MEMBER_RECOMMEND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CMIT_MEMBER_RECOMMEND
+    where RM_SKEY = #{RM_SKEY,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from CMIT_MEMBER_RECOMMEND
+    where RM_SKEY = #{RM_SKEY,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.blog.yeonji.introduce.generator.model.CmitMemberRecommendExample">
+    delete from CMIT_MEMBER_RECOMMEND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.blog.yeonji.introduce.generator.model.CmitMemberRecommend">
+    insert into CMIT_MEMBER_RECOMMEND (RM_SKEY, MEM_SKEY, RM_MEMBER1, 
+      RM_MEMBER2, RM_MEMBER3, CREATED_DT, 
+      CREATOR, LAST_MODIFIED_DT, LAST_MODIFIER, 
+      NOTE)
+    values (#{RM_SKEY,jdbcType=DECIMAL}, #{MEM_SKEY,jdbcType=DECIMAL}, #{RM_MEMBER1,jdbcType=VARCHAR}, 
+      #{RM_MEMBER2,jdbcType=VARCHAR}, #{RM_MEMBER3,jdbcType=VARCHAR}, #{CREATED_DT,jdbcType=TIMESTAMP}, 
+      #{CREATOR,jdbcType=DECIMAL}, #{LAST_MODIFIED_DT,jdbcType=TIMESTAMP}, #{LAST_MODIFIER,jdbcType=DECIMAL}, 
+      #{NOTE,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.yeonji.introduce.generator.model.CmitMemberRecommend">
+    insert into CMIT_MEMBER_RECOMMEND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="RM_SKEY != null">
+        RM_SKEY,
+      </if>
+      <if test="MEM_SKEY != null">
+        MEM_SKEY,
+      </if>
+      <if test="RM_MEMBER1 != null">
+        RM_MEMBER1,
+      </if>
+      <if test="RM_MEMBER2 != null">
+        RM_MEMBER2,
+      </if>
+      <if test="RM_MEMBER3 != null">
+        RM_MEMBER3,
+      </if>
+      <if test="CREATED_DT != null">
+        CREATED_DT,
+      </if>
+      <if test="CREATOR != null">
+        CREATOR,
+      </if>
+      <if test="LAST_MODIFIED_DT != null">
+        LAST_MODIFIED_DT,
+      </if>
+      <if test="LAST_MODIFIER != null">
+        LAST_MODIFIER,
+      </if>
+      <if test="NOTE != null">
+        NOTE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="RM_SKEY != null">
+        #{RM_SKEY,jdbcType=DECIMAL},
+      </if>
+      <if test="MEM_SKEY != null">
+        #{MEM_SKEY,jdbcType=DECIMAL},
+      </if>
+      <if test="RM_MEMBER1 != null">
+        #{RM_MEMBER1,jdbcType=VARCHAR},
+      </if>
+      <if test="RM_MEMBER2 != null">
+        #{RM_MEMBER2,jdbcType=VARCHAR},
+      </if>
+      <if test="RM_MEMBER3 != null">
+        #{RM_MEMBER3,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATED_DT != null">
+        #{CREATED_DT,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CREATOR != null">
+        #{CREATOR,jdbcType=DECIMAL},
+      </if>
+      <if test="LAST_MODIFIED_DT != null">
+        #{LAST_MODIFIED_DT,jdbcType=TIMESTAMP},
+      </if>
+      <if test="LAST_MODIFIER != null">
+        #{LAST_MODIFIER,jdbcType=DECIMAL},
+      </if>
+      <if test="NOTE != null">
+        #{NOTE,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.blog.yeonji.introduce.generator.model.CmitMemberRecommendExample" resultType="java.lang.Long">
+    select count(*) from CMIT_MEMBER_RECOMMEND
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update CMIT_MEMBER_RECOMMEND
+    <set>
+      <if test="record.RM_SKEY != null">
+        RM_SKEY = #{record.RM_SKEY,jdbcType=DECIMAL},
+      </if>
+      <if test="record.MEM_SKEY != null">
+        MEM_SKEY = #{record.MEM_SKEY,jdbcType=DECIMAL},
+      </if>
+      <if test="record.RM_MEMBER1 != null">
+        RM_MEMBER1 = #{record.RM_MEMBER1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.RM_MEMBER2 != null">
+        RM_MEMBER2 = #{record.RM_MEMBER2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.RM_MEMBER3 != null">
+        RM_MEMBER3 = #{record.RM_MEMBER3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATED_DT != null">
+        CREATED_DT = #{record.CREATED_DT,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.CREATOR != null">
+        CREATOR = #{record.CREATOR,jdbcType=DECIMAL},
+      </if>
+      <if test="record.LAST_MODIFIED_DT != null">
+        LAST_MODIFIED_DT = #{record.LAST_MODIFIED_DT,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.LAST_MODIFIER != null">
+        LAST_MODIFIER = #{record.LAST_MODIFIER,jdbcType=DECIMAL},
+      </if>
+      <if test="record.NOTE != null">
+        NOTE = #{record.NOTE,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update CMIT_MEMBER_RECOMMEND
+    set RM_SKEY = #{record.RM_SKEY,jdbcType=DECIMAL},
+      MEM_SKEY = #{record.MEM_SKEY,jdbcType=DECIMAL},
+      RM_MEMBER1 = #{record.RM_MEMBER1,jdbcType=VARCHAR},
+      RM_MEMBER2 = #{record.RM_MEMBER2,jdbcType=VARCHAR},
+      RM_MEMBER3 = #{record.RM_MEMBER3,jdbcType=VARCHAR},
+      CREATED_DT = #{record.CREATED_DT,jdbcType=TIMESTAMP},
+      CREATOR = #{record.CREATOR,jdbcType=DECIMAL},
+      LAST_MODIFIED_DT = #{record.LAST_MODIFIED_DT,jdbcType=TIMESTAMP},
+      LAST_MODIFIER = #{record.LAST_MODIFIER,jdbcType=DECIMAL},
+      NOTE = #{record.NOTE,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.yeonji.introduce.generator.model.CmitMemberRecommend">
+    update CMIT_MEMBER_RECOMMEND
+    <set>
+      <if test="MEM_SKEY != null">
+        MEM_SKEY = #{MEM_SKEY,jdbcType=DECIMAL},
+      </if>
+      <if test="RM_MEMBER1 != null">
+        RM_MEMBER1 = #{RM_MEMBER1,jdbcType=VARCHAR},
+      </if>
+      <if test="RM_MEMBER2 != null">
+        RM_MEMBER2 = #{RM_MEMBER2,jdbcType=VARCHAR},
+      </if>
+      <if test="RM_MEMBER3 != null">
+        RM_MEMBER3 = #{RM_MEMBER3,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATED_DT != null">
+        CREATED_DT = #{CREATED_DT,jdbcType=TIMESTAMP},
+      </if>
+      <if test="CREATOR != null">
+        CREATOR = #{CREATOR,jdbcType=DECIMAL},
+      </if>
+      <if test="LAST_MODIFIED_DT != null">
+        LAST_MODIFIED_DT = #{LAST_MODIFIED_DT,jdbcType=TIMESTAMP},
+      </if>
+      <if test="LAST_MODIFIER != null">
+        LAST_MODIFIER = #{LAST_MODIFIER,jdbcType=DECIMAL},
+      </if>
+      <if test="NOTE != null">
+        NOTE = #{NOTE,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RM_SKEY = #{RM_SKEY,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.yeonji.introduce.generator.model.CmitMemberRecommend">
+    update CMIT_MEMBER_RECOMMEND
+    set MEM_SKEY = #{MEM_SKEY,jdbcType=DECIMAL},
+      RM_MEMBER1 = #{RM_MEMBER1,jdbcType=VARCHAR},
+      RM_MEMBER2 = #{RM_MEMBER2,jdbcType=VARCHAR},
+      RM_MEMBER3 = #{RM_MEMBER3,jdbcType=VARCHAR},
+      CREATED_DT = #{CREATED_DT,jdbcType=TIMESTAMP},
+      CREATOR = #{CREATOR,jdbcType=DECIMAL},
+      LAST_MODIFIED_DT = #{LAST_MODIFIED_DT,jdbcType=TIMESTAMP},
+      LAST_MODIFIER = #{LAST_MODIFIER,jdbcType=DECIMAL},
+      NOTE = #{NOTE,jdbcType=VARCHAR}
+    where RM_SKEY = #{RM_SKEY,jdbcType=DECIMAL}
+  </update>
+</mapper>
